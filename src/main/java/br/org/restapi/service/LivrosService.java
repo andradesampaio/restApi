@@ -8,7 +8,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class LivrosService {
@@ -20,14 +19,9 @@ public class LivrosService {
         return livrosRepository.findAll();
     }
 
-    public Optional<Livro> buscar(Long id) {
-        Optional<Livro> livro = livrosRepository.findById(id);
-
-        if(livro == null) {
-            throw new LivroNaoEncontradoException("O livro não pôde ser encontrado.");
-        }
-
-        return livro;
+    public Livro buscar(Long id) {
+        return livrosRepository.findById(id)
+                .orElseThrow(() -> new LivroNaoEncontradoException("O livro não pôde ser encontrado."));
     }
 
     public Livro salvar(Livro livro) {
