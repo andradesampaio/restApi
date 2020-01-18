@@ -1,12 +1,15 @@
 package br.org.restapi.service;
 
+import br.org.restapi.domains.Comentario;
 import br.org.restapi.domains.Livro;
+import br.org.restapi.repository.ComentariosRepository;
 import br.org.restapi.repository.LivrosRepository;
 import br.org.restapi.service.exception.LivroNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -14,6 +17,8 @@ public class LivrosService {
 
     @Autowired
     private LivrosRepository livrosRepository;
+    @Autowired
+    private ComentariosRepository comentariosRepository;
 
     public List<Livro> listar() {
         return livrosRepository.findAll();
@@ -46,5 +51,16 @@ public class LivrosService {
         buscar(livro.getId());
     }
 
+    public Comentario salvarComentario(Long livroId, Comentario comentario) {
+        Livro livro = buscar(livroId);
+        comentario.setLivro(livro);
+        comentario.setData(new Date());
+        return comentariosRepository.save(comentario);
+    }
+
+    public List<Comentario> listarComentarios(Long livroId) {
+        Livro livro = buscar(livroId);
+        return livro.getComentarios();
+    }
 }
 

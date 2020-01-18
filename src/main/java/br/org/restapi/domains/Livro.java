@@ -3,10 +3,7 @@ package br.org.restapi.domains;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -19,6 +16,7 @@ public class Livro {
     private String nome;
     private String editora;
     private String resumo;
-    private transient List<Comentario> comentarios;
+    @OneToMany(mappedBy = "livro")
+    private List<Comentario> comentarios;
     private String autor;
 }
