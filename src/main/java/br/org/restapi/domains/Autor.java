@@ -1,25 +1,32 @@
 package br.org.restapi.domains;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
-@Entity
 @Data
+@Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Livro {
+public class Autor {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
-    private String editora;
-    private String resumo;
-    @OneToMany(mappedBy = "livro")
-    private List<Comentario> comentarios;
-    @ManyToOne
-    @JoinColumn(name = "AUTOR_ID")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Autor autor;
+
+    private Date nascimento;
+
+    private String nacionalidade;
+
+    @OneToMany(mappedBy = "autor")
+    @JsonIgnore
+    private List<Livro> livros;
+
+
+
 }
