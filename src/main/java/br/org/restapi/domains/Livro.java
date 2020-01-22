@@ -17,6 +17,7 @@ public class Livro {
     private String editora;
     private String resumo;
     @OneToMany(mappedBy = "livro")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<Comentario> comentarios;
     @ManyToOne
     @JoinColumn(name = "AUTOR_ID")
