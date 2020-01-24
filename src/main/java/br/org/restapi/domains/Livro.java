@@ -1,6 +1,7 @@
 package br.org.restapi.domains;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public class Livro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotEmpty(message = "O campo nome não pode ser vazio.")
+    @JsonProperty("name")
     private String nome;
     private String editora;
     @NotEmpty(message = "O resumo de ver preenchido.")
