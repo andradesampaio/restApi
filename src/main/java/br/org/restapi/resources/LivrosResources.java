@@ -8,6 +8,8 @@ import br.org.restapi.service.exception.LivroNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -60,6 +62,10 @@ public class LivrosResources {
     @RequestMapping(value = "/{id}/comentarios", method = RequestMethod.POST)
     public ResponseEntity<Void> adicionarComentario(@PathVariable("id") Long livroId, @RequestBody Comentario comentario) {
         livrosService.salvarComentario(livroId, comentario);
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        comentario.setUsuario(authentication.getName());
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
         return ResponseEntity.created(uri).build();
     }
