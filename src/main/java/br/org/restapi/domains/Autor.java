@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 import java.util.List;
 
@@ -17,9 +18,11 @@ public class Autor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty(message = "O campo nome não pode ser vazio.")
     private String nome;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date nascimento;
+    @NotEmpty(message = "O campo nome não pode ser vazio.")
     private String nacionalidade;
     @OneToMany(mappedBy = "autor")
     @JsonIgnore
