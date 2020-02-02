@@ -22,6 +22,7 @@ public class AutoresResource {
     @Autowired
     private AutoresService autoresService;
 
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<List<Autor>> listar() {
         List<Autor> autores = autoresService.listar();

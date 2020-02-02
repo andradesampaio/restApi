@@ -16,12 +16,11 @@ public class Livro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty(message = "O campo nome não pode ser vazio.")
     @JsonProperty("name")
     private String nome;
     private String editora;
-    @NotEmpty(message = "O resumo de ver preenchido.")
-    @Size(max = 1500, message = "O resumo não pode conter mais de 1500 caracteres.")
+    //@NotEmpty(message = "O resumo de ver preenchido.")
+    //@Size(max = 1500, message = "O resumo não pode conter mais de 1500 caracteres.")
     private String resumo;
     @OneToMany(mappedBy = "livro")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)

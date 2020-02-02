@@ -18,11 +18,9 @@ public class Autor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty(message = "O campo nome não pode ser vazio.")
     private String nome;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date nascimento;
-    @NotEmpty(message = "O campo nome não pode ser vazio.")
     private String nacionalidade;
     @OneToMany(mappedBy = "autor")
     @JsonIgnore
